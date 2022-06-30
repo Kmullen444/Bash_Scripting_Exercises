@@ -1,14 +1,15 @@
 #! /bin/ruby
 
+files = ARGV
 
-puts 'Enter a file or directory'
+files.each do |file|
 
-file = gets.chomp
+  puts "#{file} is a #{File.ftype(file)}"
 
-puts "#{file} is a #{File.ftype(file)}"
+  if File.ftype(file) != 'directory'
+    puts `cat #{file}`
+  end
 
-if File.ftype(file) != 'directory'
-  return
+  puts `ls #{file}`
 end
 
-puts `ls #{file}`
